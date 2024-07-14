@@ -19,7 +19,6 @@ export default {
 
   mounted() {
     const url = state.base_api_url + state.photos_endpoint;
-    //console.log(url);
     state.fetchData(url);
   },
 };
@@ -34,7 +33,7 @@ export default {
         name="category"
         id="category"
         v-model="state.category"
-        @change="state.filterByCategory()"
+        @change="state.applyFilter()"
       >
         <CategoryOptions></CategoryOptions>
       </select>

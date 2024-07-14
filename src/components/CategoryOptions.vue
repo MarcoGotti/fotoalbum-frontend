@@ -6,7 +6,6 @@ export default {
   data() {
     return {
       state,
-      categories_endpoint: "/api/categories",
     };
   },
   created() {
@@ -15,10 +14,9 @@ export default {
   computed: {
     getCategories() {
       axios
-        .get(state.base_api_url + this.categories_endpoint)
+        .get(state.base_api_url + state.categories_endpoint)
         .then((response) => {
           state.categories = response.data.results;
-          console.log(state.categories);
         })
         .catch((error) => {
           console.error(error);
