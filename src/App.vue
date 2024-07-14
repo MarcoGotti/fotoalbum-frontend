@@ -1,7 +1,8 @@
 <script>
 import { state } from "../src/state.js";
 import PhotoCard from "./components/PhotoCard.vue";
-
+import Pagination from "./components/Pagination.vue";
+import CategoryOptions from "./components/CategoryOptions.vue";
 export default {
   name: "App",
   data() {
@@ -12,6 +13,8 @@ export default {
 
   components: {
     PhotoCard,
+    Pagination,
+    CategoryOptions,
   },
 
   mounted() {
@@ -23,6 +26,21 @@ export default {
 </script>
 
 <template>
+  <header class="d-flex p-5">
+    <div class="col-12 col-sm-4 col-md-3">
+      <!-- <label for="" class="form-label">City</label> -->
+      <select
+        class="form-select form-select-sm"
+        name="category"
+        id="category"
+        v-model="state.category"
+        @change="state.filterByCategory()"
+      >
+        <CategoryOptions></CategoryOptions>
+      </select>
+    </div>
+  </header>
+
   <section class="photos" v-if="state.photos">
     <div class="container">
       <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
@@ -31,33 +49,11 @@ export default {
         </div>
       </div>
 
-      <nav
-        aria-label="Page navigation"
-        v-if="state.results.total > state.results.per_page"
-      >
-        <ul class="pagination pagination-sm justify-content-center">
-          <li
-            class="page-item"
-            :class="{ disabled: !link.url, active: link.active }"
-            v-for="link in state.results.links"
-          >
-            <button
-              type="button"
-              class="page-link"
-              @click="state.goTo(link.url)"
-            >
-              <span v-html="link.label"></span>
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <Pagination></Pagination>
     </div>
   </section>
 
-  <section class="unsuccessful_call" v-else>
-    <!-- "state.projects.length == 0" -->
-    there are no projects
-  </section>
+  <section class="unsuccessful_call" v-else>there are no projects</section>
 </template>
 
 <style scoped></style>

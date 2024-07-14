@@ -6,6 +6,8 @@ export const state = reactive({
   photos_endpoint: "/api/photos",
   photos: null,
   results: null,
+  category: "",
+  categories: [],
 
   fetchData(url) {
     axios
@@ -22,5 +24,10 @@ export const state = reactive({
 
   goTo(url) {
     this.fetchData(url);
+  },
+
+  filterByCategory() {
+    if (!category) return this.photos;
+    return this.photos.filter(photo);
   },
 });
