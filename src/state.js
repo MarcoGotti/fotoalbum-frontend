@@ -19,7 +19,9 @@ export const state = reactive({
         console.log(response);
         response.data.results.data
           ? (this.photos = response.data.results.data)
-          : (this.photos = response.data.results.photos);
+          : (this.photos = response.data.results.photos.filter(
+              (photo) => photo.is_draft != 1
+            ));
 
         /* this.photos.forEach(
           (photo) =>
@@ -28,6 +30,7 @@ export const state = reactive({
 
         this.results = response.data.results;
         this.loader = false;
+        console.log(this.photos);
       })
       .catch((error) => {
         console.log(error);
