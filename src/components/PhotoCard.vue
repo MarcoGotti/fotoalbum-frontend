@@ -14,19 +14,23 @@ export default {
 </script>
 
 <template>
-  <div class="card">
+  <div class="card bg-warning-subtle">
     <img :src="photo.upload" alt="" />
     <div class="card-body">
       {{ photo.title }}
     </div>
     <div class="card-footer">
       <div class="d-flex flex-wrap gap-1">
-        <a
+        <button
           class="btn btn-sm btn-dark"
-          href=""
+          @click="
+            state.category = cat.id;
+            state.filterSelect();
+          "
           v-for="cat in photo.categories"
-          >{{ cat.name }}</a
         >
+          {{ cat.name }}
+        </button>
       </div>
     </div>
   </div>

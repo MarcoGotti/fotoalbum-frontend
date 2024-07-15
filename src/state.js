@@ -55,6 +55,7 @@ export const state = reactive({
   },
 
   filterCheck() {
+    this.category = "";
     const url =
       this.base_api_url +
       this.photos_endpoint +

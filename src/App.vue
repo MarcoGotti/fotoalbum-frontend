@@ -20,16 +20,15 @@ export default {
 
   mounted() {
     const url = state.base_api_url + state.photos_endpoint;
-    console.log("recharge");
     state.fetchData(url);
   },
 };
 </script>
 
 <template>
-  <header class="d-flex p-5">
+  <header class="bg-warning shadow-lg position-relative z-2 d-flex p-5 gap-5">
     <div class="col-12 col-sm-4 col-md-3">
-      <!-- <label for="" class="form-label">City</label> -->
+      <label for="category" class="form-label">Search with categories</label>
       <select
         class="form-select form-select-sm"
         name="category"
