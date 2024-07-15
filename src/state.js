@@ -10,6 +10,7 @@ export const state = reactive({
   category: "",
   categories: [],
   loader: true,
+  highlights: false,
 
   fetchData(url) {
     axios
@@ -19,10 +20,12 @@ export const state = reactive({
         response.data.results.data
           ? (this.photos = response.data.results.data)
           : (this.photos = response.data.results.photos);
+
         /* this.photos.forEach(
           (photo) =>
             (photo.category_ids = photo.categories.map((cat) => cat.id))
         ); */
+
         this.results = response.data.results;
         this.loader = false;
       })
@@ -30,23 +33,6 @@ export const state = reactive({
         console.log(error);
       });
   },
-
-  /* fetchAllData(url) {
-    axios
-      .get(url)
-      .then((response) => {
-        console.log(response.data.results);
-        this.all_photos = response.data.results;
-        this.all_photos.forEach(
-          (photo) =>
-            (photo.category_ids = photo.categories.map((cat) => cat.id))
-        );
-        console.log(this.all_photos);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, */
 
   goTo(url) {
     this.fetchData(url);
@@ -57,7 +43,7 @@ export const state = reactive({
     return arr.filter((photo) => photo.category_ids.includes(category));
   }, */
 
-  applyFilter() {
+  filterSelect() {
     if (!this.category) {
       const url = state.base_api_url + state.photos_endpoint;
       state.fetchData(url);
@@ -66,5 +52,14 @@ export const state = reactive({
       console.log(url);
       state.fetchData(url);
     }
+  },
+
+  filterCheck() {
+    const url =
+      this.base_api_url +
+      this.photos_endpoint +
+      (this.highlights ? `?is_highlight=${this.highlights}` : "");
+    console.log(url);
+    state.fetchData(url);
   },
 });

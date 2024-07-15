@@ -20,6 +20,7 @@ export default {
 
   mounted() {
     const url = state.base_api_url + state.photos_endpoint;
+    console.log("recharge");
     state.fetchData(url);
   },
 };
@@ -34,10 +35,22 @@ export default {
         name="category"
         id="category"
         v-model="state.category"
-        @change="state.applyFilter()"
+        @change="state.filterSelect()"
       >
         <CategoryOptions></CategoryOptions>
       </select>
+    </div>
+    <div class="col-12 col-sm-4 col-md-3">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          v-model="state.highlights"
+          id="checkbox"
+          @change="state.filterCheck()"
+        />
+        <label class="form-check-label" for=""> Highlights </label>
+      </div>
     </div>
   </header>
   <Loader v-if="state.loader"></Loader>
