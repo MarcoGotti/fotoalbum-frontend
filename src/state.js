@@ -9,6 +9,7 @@ export const state = reactive({
   results: null,
   category: "",
   categories: [],
+  loader: true,
 
   fetchData(url) {
     axios
@@ -23,6 +24,7 @@ export const state = reactive({
             (photo.category_ids = photo.categories.map((cat) => cat.id))
         ); */
         this.results = response.data.results;
+        this.loader = false;
       })
       .catch((error) => {
         console.log(error);

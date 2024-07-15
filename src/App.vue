@@ -1,8 +1,9 @@
 <script>
 import { state } from "../src/state.js";
-import PhotoCard from "./components/PhotoCard.vue";
-import Pagination from "./components/Pagination.vue";
+import AppMain from "./components/AppMain.vue";
 import CategoryOptions from "./components/CategoryOptions.vue";
+import Loader from "./components/Loader.vue";
+
 export default {
   name: "App",
   data() {
@@ -12,9 +13,9 @@ export default {
   },
 
   components: {
-    PhotoCard,
-    Pagination,
+    AppMain,
     CategoryOptions,
+    Loader,
   },
 
   mounted() {
@@ -39,20 +40,8 @@ export default {
       </select>
     </div>
   </header>
-
-  <section class="photos" v-if="state.photos">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-        <div class="col" v-for="photo in state.photos">
-          <PhotoCard :photo="photo"></PhotoCard>
-        </div>
-      </div>
-
-      <Pagination></Pagination>
-    </div>
-  </section>
-
-  <section class="unsuccessful_call" v-else>there are no projects</section>
+  <Loader v-if="state.loader"></Loader>
+  <AppMain v-else></AppMain>
 </template>
 
 <style scoped></style>
