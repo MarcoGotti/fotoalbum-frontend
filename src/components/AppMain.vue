@@ -28,7 +28,7 @@ export default {
           </div>
         </div>
 
-        <Pagination></Pagination>
+        <Pagination v-show="!state.category && !state.highlights"></Pagination>
       </div>
     </section>
 

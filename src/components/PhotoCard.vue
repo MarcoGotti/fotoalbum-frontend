@@ -19,7 +19,7 @@ export default {
     <div class="card-body">
       {{ photo.title }}
     </div>
-    <div class="card-footer">
+    <div class="card-footer" v-show="!state.category">
       <div class="d-flex flex-wrap gap-1">
         <button
           class="btn btn-sm btn-dark"

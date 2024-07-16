@@ -17,18 +17,33 @@ export const state = reactive({
       .get(url)
       .then((response) => {
         console.log(response);
+
+        /* if (response.data.results.data) {
+          this.photos = response.data.results.data;
+          this.results = response.data.results;
+        }
+        if (response.data.results.photos) {
+          this.photos = response.data.results.photos.filter(
+            (photo) => photo.is_draft != 1
+          );
+        } else {
+          this.photos = response.data.results;
+        } */
+        this.results = null; //potrei ometterlo se tengo '->get()' di là e '&& !state.highlights' di qua
         response.data.results.data
-          ? (this.photos = response.data.results.data)
-          : (this.photos = response.data.results.photos.filter(
+          ? (this.photos = response.data.results.data) &&
+            (this.results = response.data.results)
+          : response.data.results.photos
+          ? (this.photos = response.data.results.photos.filter(
               (photo) => photo.is_draft != 1
-            ));
+            ))
+          : (this.photos = response.data.results);
 
         /* this.photos.forEach(
           (photo) =>
             (photo.category_ids = photo.categories.map((cat) => cat.id))
         ); */
 
-        this.results = response.data.results;
         this.loader = false;
         console.log(this.photos);
       })
@@ -41,7 +56,7 @@ export const state = reactive({
     this.fetchData(url);
   },
 
-  /* filterByCategory(arr, category) {
+  /* filterSelect(arr, category) {
     if (!category) return arr;
     return arr.filter((photo) => photo.category_ids.includes(category));
   }, */
@@ -51,6 +66,7 @@ export const state = reactive({
       const url = state.base_api_url + state.photos_endpoint;
       state.fetchData(url);
     } else {
+      this.highlights = false;
       const url = this.base_api_url + this.categories_endpoint + this.category;
       console.log(url);
       state.fetchData(url);
