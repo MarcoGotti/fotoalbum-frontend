@@ -29,7 +29,7 @@ export const state = reactive({
         } else {
           this.photos = response.data.results;
         } */
-        this.results = null; //potrei ometterlo se tengo '->get()' di là e '&& !state.highlights' di qua
+
         response.data.results.data
           ? (this.photos = response.data.results.data) &&
             (this.results = response.data.results)
