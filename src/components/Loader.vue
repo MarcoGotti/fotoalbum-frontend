@@ -11,9 +11,9 @@ export default {
 <style scoped>
 .loader {
   margin: 5rem auto;
-  border: 8px solid blue /* var(--bool-dark) */;
+  border: 8px solid #212529 /* var(--bool-dark) */;
   border-radius: 50%;
-  border-top: 8px solid red /* var(--bool-focus) */;
+  border-top: 8px solid #ffc107 /* var(--bool-focus) */;
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;

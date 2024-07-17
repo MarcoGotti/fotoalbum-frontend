@@ -18,7 +18,7 @@ export default {
 };
 </script>
 <template>
-  <main class="bg-warning-subtle">
+  <main>
     <section class="photos" v-if="state.photos.length > 0">
       <div class="container py-5">
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
