@@ -15,11 +15,15 @@ export default {
 
 <template>
   <div class="card bg-warning-subtle">
-    <img :src="photo.upload" alt="" />
+    <img
+      :class="photo.is_highlight ? 'border border-warning border-3' : ''"
+      :src="photo.upload"
+      alt=""
+    />
     <div class="card-body">
       {{ photo.title }}
     </div>
-    <div class="card-footer" v-show="!state.category">
+    <div class="card-footer">
       <div class="d-flex flex-wrap gap-1">
         <button
           class="btn btn-sm btn-dark"
